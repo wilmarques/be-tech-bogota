@@ -50,87 +50,81 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     context.watch<FFAppState>();
 
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Home',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Santander Headline',
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  useGoogleFonts: false,
-                ),
-          ),
-          actions: [],
-          centerTitle: false,
-          elevation: 2.0,
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primary,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Home',
+          style: FlutterFlowTheme.of(context).headlineMedium.override(
+                fontFamily: 'Santander Headline',
+                color: Colors.white,
+                fontSize: 22.0,
+                useGoogleFonts: false,
+              ),
         ),
-        body: SafeArea(
-          top: true,
-          child: Padding(
-            padding:
-                const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
-            child: Builder(builder: (context) {
-              final appState = context.watch<FFAppState>();
+        actions: const [],
+        centerTitle: false,
+        elevation: 2.0,
+      ),
+      body: SafeArea(
+        top: true,
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
+          child: Builder(builder: (context) {
+            final appState = context.watch<FFAppState>();
 
-              return appState.products.isNotEmpty && appState.sales.isNotEmpty
-                  ? Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed('BalancePage');
-                          },
-                          child: wrapWithModel(
-                            model: _model.balanceCardModel,
-                            updateCallback: () => setState(() {}),
-                            child: const BalanceCardWidget(),
-                          ),
+            return appState.products.isNotEmpty && appState.sales.isNotEmpty
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('BalancePage');
+                        },
+                        child: wrapWithModel(
+                          model: _model.balanceCardModel,
+                          updateCallback: () => setState(() {}),
+                          child: const BalanceCardWidget(),
                         ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed(
-                              'InsightsPage',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: const TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.scale,
-                                  alignment: Alignment.bottomCenter,
-                                ),
-                              },
-                            );
-                          },
-                          child: wrapWithModel(
-                            model: _model.mostSellingProductCardModel,
-                            updateCallback: () => setState(() {}),
-                            child: const MostSellingProductCardWidget(),
-                          ),
+                      ),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            'InsightsPage',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: const TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.scale,
+                                alignment: Alignment.bottomCenter,
+                              ),
+                            },
+                          );
+                        },
+                        child: wrapWithModel(
+                          model: _model.mostSellingProductCardModel,
+                          updateCallback: () => setState(() {}),
+                          child: const MostSellingProductCardWidget(),
                         ),
-                      ].divide(const SizedBox(height: 10.0)),
-                    )
-                  : const Center(
-                      child: Text(
-                          'Add products and sales to see the magic happen'));
-            }),
-          ),
+                      ),
+                    ].divide(const SizedBox(height: 10.0)),
+                  )
+                : const Center(
+                    child:
+                        Text('Add products and sales to see the magic happen'));
+          }),
         ),
       ),
     );

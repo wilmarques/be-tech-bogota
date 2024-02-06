@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'add_product_page_model.dart';
+
 export 'add_product_page_model.dart';
 
 class AddProductPageWidget extends StatefulWidget {
@@ -78,7 +78,7 @@ class _AddProductPageWidgetState extends State<AddProductPageWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -96,27 +96,29 @@ class _AddProductPageWidgetState extends State<AddProductPageWidget> {
                   useGoogleFonts: false,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 12.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 12.0, 0.0),
                   child: Text(
                     'Add details for the product',
                     style: FlutterFlowTheme.of(context).headlineLarge,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                   child: TextFormField(
                     controller: _model.nameTextFieldController,
                     focusNode: _model.nameTextFieldFocusNode,
@@ -161,7 +163,8 @@ class _AddProductPageWidgetState extends State<AddProductPageWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                   child: TextFormField(
                     controller: _model.productionCostTextFieldController,
                     focusNode: _model.productionCostTextFieldFocusNode,
@@ -206,12 +209,13 @@ class _AddProductPageWidgetState extends State<AddProductPageWidget> {
                     validator: _model.productionCostTextFieldControllerValidator
                         .asValidator(context),
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                   child: TextFormField(
                     controller: _model.priceTextFieldController,
                     focusNode: _model.priceTextFieldFocusNode,
@@ -256,12 +260,13 @@ class _AddProductPageWidgetState extends State<AddProductPageWidget> {
                     validator: _model.priceTextFieldControllerValidator
                         .asValidator(context),
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                   child: TextFormField(
                     controller: _model.imageTextFieldController,
                     focusNode: _model.imageTextFieldFocusNode,
@@ -315,12 +320,14 @@ class _AddProductPageWidgetState extends State<AddProductPageWidget> {
                         child: Image.network(
                           _model.imageTextFieldController.text,
                           fit: BoxFit.fill,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Text('Loading image'),
                         ),
                       ),
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -344,9 +351,9 @@ class _AddProductPageWidgetState extends State<AddProductPageWidget> {
                         text: 'Button',
                         options: FFButtonOptions(
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
@@ -356,7 +363,7 @@ class _AddProductPageWidgetState extends State<AddProductPageWidget> {
                                     useGoogleFonts: false,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -366,7 +373,7 @@ class _AddProductPageWidgetState extends State<AddProductPageWidget> {
                     ),
                   ],
                 ),
-              ].divide(SizedBox(height: 10.0)),
+              ].divide(const SizedBox(height: 10.0)),
             ),
           ),
         ),

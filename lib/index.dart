@@ -5,4 +5,4 @@ export '/pages/add_product_page/add_product_page_widget.dart'
     show AddProductPageWidget;
 export '/pages/add_sale_page/add_sale_page_widget.dart' show AddSalePageWidget;
 export '/pages/balance_page/balance_page_widget.dart' show BalancePageWidget;
-export '/products_page/products_page_widget.dart' show ProductsPageWidget;
+export 'pages/products_page/products_page_widget.dart' show ProductsPageWidget;

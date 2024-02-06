@@ -1,16 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
+
 import '/components/product_sales_list/product_sales_list_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'insights_page_model.dart';
+
 export 'insights_page_model.dart';
 
 class InsightsPageWidget extends StatefulWidget {
@@ -35,8 +33,8 @@ class _InsightsPageWidgetState extends State<InsightsPageWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(115.0, 0.0),
+          begin: const Offset(0.0, 0.0),
+          end: const Offset(115.0, 0.0),
         ),
       ],
     ),
@@ -96,237 +94,257 @@ class _InsightsPageWidgetState extends State<InsightsPageWidget>
                   useGoogleFonts: false,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 2.0,
         ),
-        body: SafeArea(
-          top: true,
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  width: 250.0,
-                  height: 50.0,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF1F4F8),
-                    borderRadius: BorderRadius.circular(12.0),
-                    border: Border.all(
-                      color: Color(0xFFE0E3E7),
-                      width: 1.0,
-                    ),
-                  ),
+        body: Builder(builder: (context) {
+          final appState = context.watch<FFAppState>();
+          return appState.sales.isNotEmpty
+              ? SafeArea(
+                  top: true,
                   child: Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Row(
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 10.0, 0.0, 0.0),
+                    child: Column(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              setState(() {
-                                _model.orderByLeastSelling = false;
-                              });
-                            },
-                            child: Container(
-                              width: 115.0,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                color: _model.orderByLeastSelling == false
-                                    ? Colors.white
-                                    : Color(0xFFF1F4F8),
-                                borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                  color: valueOrDefault<Color>(
-                                    _model.orderByLeastSelling == false
-                                        ? Color(0xFFE0E3E7)
-                                        : Color(0xFFF1F4F8),
-                                    Color(0xFFE0E3E7),
-                                  ),
-                                  width: 1.0,
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    FFIcons.kchevronUp,
-                                    color: Color(0xFF14181B),
-                                    size: 16.0,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        4.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Most selling',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                        Container(
+                          width: 250.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF1F4F8),
+                            borderRadius: BorderRadius.circular(12.0),
+                            border: Border.all(
+                              color: const Color(0xFFE0E3E7),
+                              width: 1.0,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      setState(() {
+                                        _model.orderByLeastSelling = false;
+                                      });
+                                    },
+                                    child: Container(
+                                      width: 115.0,
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            _model.orderByLeastSelling == false
+                                                ? Colors.white
+                                                : const Color(0xFFF1F4F8),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        border: Border.all(
+                                          color: valueOrDefault<Color>(
+                                            _model.orderByLeastSelling == false
+                                                ? const Color(0xFFE0E3E7)
+                                                : const Color(0xFFF1F4F8),
+                                            const Color(0xFFE0E3E7),
+                                          ),
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            FFIcons.kchevronUp,
+                                            color: Color(0xFF14181B),
+                                            size: 16.0,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(4.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Most selling',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Expanded(
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      setState(() {
+                                        _model.orderByLeastSelling = true;
+                                      });
+                                    },
+                                    child: Container(
+                                      width: 115.0,
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            _model.orderByLeastSelling == true
+                                                ? Colors.white
+                                                : const Color(0xFFF1F4F8),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        border: Border.all(
+                                          color: valueOrDefault<Color>(
+                                            _model.orderByLeastSelling == true
+                                                ? const Color(0xFFE0E3E7)
+                                                : const Color(0xFFF1F4F8),
+                                            const Color(0xFFF1F4F8),
+                                          ),
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            FFIcons.kchevronDown,
+                                            color: Color(0xFF14181B),
+                                            size: 16.0,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(4.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Least selling',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Santander Micro Text',
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ).animateOnActionTrigger(
+                                    animationsMap[
+                                        'containerOnActionTriggerAnimation']!,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              setState(() {
-                                _model.orderByLeastSelling = true;
-                              });
-                            },
-                            child: Container(
-                              width: 115.0,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                color: _model.orderByLeastSelling == true
-                                    ? Colors.white
-                                    : Color(0xFFF1F4F8),
-                                borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                  color: valueOrDefault<Color>(
-                                    _model.orderByLeastSelling == true
-                                        ? Color(0xFFE0E3E7)
-                                        : Color(0xFFF1F4F8),
-                                    Color(0xFFF1F4F8),
-                                  ),
-                                  width: 1.0,
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 12.0, 0.0),
+                                child: Text(
+                                  '${_model.orderByLeastSelling == false ? 'Most' : 'Least'} selling products',
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineLarge,
                                 ),
                               ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    FFIcons.kchevronDown,
-                                    color: Color(0xFF14181B),
-                                    size: 16.0,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        4.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Least selling',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Santander Micro Text',
-                                            fontWeight: FontWeight.normal,
-                                            useGoogleFonts: false,
-                                          ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 4.0, 12.0, 0.0),
+                                child: Text(
+                                  'Which products are selling or not',
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 16.0, 0.0, 0.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 50.0,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFF1F4F8),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(0.0),
+                                      bottomRight: Radius.circular(0.0),
+                                      topLeft: Radius.circular(8.0),
+                                      topRight: Radius.circular(8.0),
                                     ),
                                   ),
-                                ],
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 5.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        const Spacer(),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text(
+                                            'Product',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'Price',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'Times sold',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
+                                          ),
+                                        ),
+                                      ].divide(const SizedBox(width: 5.0)),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ).animateOnActionTrigger(
-                            animationsMap['containerOnActionTriggerAnimation']!,
+                              wrapWithModel(
+                                model: _model.productSalesListModel,
+                                updateCallback: () => setState(() {}),
+                                child: const ProductSalesListWidget(
+                                  orderByLeastSelling: false,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                        child: Text(
-                          '${_model.orderByLeastSelling == false ? 'Most' : 'Least'} selling products',
-                          style: FlutterFlowTheme.of(context).headlineLarge,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 12.0, 0.0),
-                        child: Text(
-                          'Which products are selling or not',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 50.0,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFF1F4F8),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(0.0),
-                              bottomRight: Radius.circular(0.0),
-                              topLeft: Radius.circular(8.0),
-                              topRight: Radius.circular(8.0),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 5.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Spacer(),
-                                Expanded(
-                                  flex: 3,
-                                  child: Text(
-                                    'Product',
-                                    textAlign: TextAlign.center,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyLarge,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    'Price',
-                                    textAlign: TextAlign.center,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyLarge,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    'Times sold',
-                                    textAlign: TextAlign.center,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyLarge,
-                                  ),
-                                ),
-                              ].divide(SizedBox(width: 5.0)),
-                            ),
-                          ),
-                        ),
-                      ),
-                      wrapWithModel(
-                        model: _model.productSalesListModel,
-                        updateCallback: () => setState(() {}),
-                        child: ProductSalesListWidget(
-                          orderByLeastSelling: false,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+                )
+              : const Center(child: Text('Add sales to see insights'));
+        }),
       ),
     );
   }

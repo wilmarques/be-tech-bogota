@@ -1,17 +1,16 @@
-import '/backend/schema/structs/index.dart';
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
+
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'most_selling_product_card_model.dart';
+
 export 'most_selling_product_card_model.dart';
 
 class MostSellingProductCardWidget extends StatefulWidget {
@@ -41,8 +40,8 @@ class _MostSellingProductCardWidgetState
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 50.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 50.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -63,10 +62,9 @@ class _MostSellingProductCardWidgetState
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       // getMostSellingProduct
       setState(() {
-        _model.productSales = functions
-            .calculateProductSales(FFAppState().sales.toList(),
-                FFAppState().products.toList(), false)
-            .first;
+        final productSales = functions.calculateProductSales(
+            FFAppState().sales.toList(), FFAppState().products.toList(), false);
+        _model.productSales = productSales.firstOrNull;
       });
     });
 
@@ -95,7 +93,7 @@ class _MostSellingProductCardWidgetState
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             blurRadius: 2.0,
             color: Color(0x520E151B),
@@ -104,7 +102,7 @@ class _MostSellingProductCardWidgetState
         ],
         borderRadius: BorderRadius.circular(12.0),
       ),
-      child: Container(
+      child: SizedBox(
         height: 300.0,
         child: Stack(
           children: [
@@ -130,7 +128,7 @@ class _MostSellingProductCardWidgetState
                     ),
                     child: Container(
                       width: double.infinity,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color(0xB2FFFFFF),
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(12.0),
@@ -140,18 +138,18 @@ class _MostSellingProductCardWidgetState
                         ),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${_model.productSales?.product?.name} sold ${_model.productSales?.sales?.length?.toString()} times!',
+                              '${_model.productSales?.product.name} sold ${_model.productSales?.sales.length.toString()} times!',
                               style:
                                   FlutterFlowTheme.of(context).headlineMedium,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 5.0, 0.0, 0.0),
                               child: Text(
                                 'Tap to see the most and least selling products',

@@ -1,16 +1,14 @@
-import '/backend/schema/structs/index.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'balance_card_model.dart';
+
 export 'balance_card_model.dart';
 
 class BalanceCardWidget extends StatefulWidget {
@@ -75,7 +73,7 @@ class _BalanceCardWidgetState extends State<BalanceCardWidget> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             blurRadius: 2.0,
             color: Color(0x520E151B),
@@ -87,13 +85,14 @@ class _BalanceCardWidgetState extends State<BalanceCardWidget> {
       child: Visibility(
         visible: (FFAppState().sales.isNotEmpty) == false,
         child: Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
                 child: Text(
                   'Cash flow',
                   style: FlutterFlowTheme.of(context).headlineLarge,
@@ -109,7 +108,7 @@ class _BalanceCardWidgetState extends State<BalanceCardWidget> {
                 textAlign: TextAlign.end,
                 style: FlutterFlowTheme.of(context).displayLarge,
               ),
-              Divider(
+              const Divider(
                 height: 2.0,
                 thickness: 1.0,
                 color: Color(0xFFE5E7EB),
@@ -147,22 +146,25 @@ class _BalanceCardWidgetState extends State<BalanceCardWidget> {
                   ],
                   style: FlutterFlowTheme.of(context).displaySmall.override(
                         fontFamily: 'Outfit',
-                        color: Color(0xFF15161E),
+                        color: const Color(0xFF15161E),
                         fontSize: 32.0,
                         fontWeight: FontWeight.w600,
                       ),
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: LinearPercentIndicator(
-                  percent: _model.totalProfit / _model.cashFlow,
+                  percent: FFAppState().sales.isNotEmpty
+                      ? _model.totalProfit / _model.cashFlow
+                      : 0,
                   lineHeight: 12.0,
                   animation: true,
                   animateFromLastPercent: true,
                   progressColor: FlutterFlowTheme.of(context).alternate,
-                  backgroundColor: Color(0x400D5155),
-                  barRadius: Radius.circular(16.0),
+                  backgroundColor: const Color(0x400D5155),
+                  barRadius: const Radius.circular(16.0),
                   padding: EdgeInsets.zero,
                 ),
               ),

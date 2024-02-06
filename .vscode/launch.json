@@ -10,6 +10,7 @@
       "request": "launch",
       "flutterMode": "debug",
       "toolArgs": [
+        // flutter run -d localhost:58526 --dds-port 35123 --host-vmservice-port 34123 --device-vmservice-port 35321
         "--web-hostname",
         "0.0.0.0",
         "--web-port",
@@ -18,9 +19,12 @@
         "--auto-open-devtools-for-tabs",
         "--web-browser-flag",
         "--start-maximized",
-        // "--dds-port", "35000" // Not working currently - It's Flutter Web bug (issue #84179)
-        // "--host-vmservice-port", "35000"
-        // "--device-vmservice-port", "35000"
+        "--dds-port",
+        "34123",
+        "--host-vmservice-port",
+        "35123",
+        "--device-vmservice-port",
+        "35321"
       ]
     },
     {

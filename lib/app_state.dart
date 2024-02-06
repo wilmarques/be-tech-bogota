@@ -74,117 +74,117 @@ class FFAppState extends ChangeNotifier {
 
   List<ProductStruct> _products = [];
   List<ProductStruct> get products => _products;
-  set products(List<ProductStruct> _value) {
-    _products = _value;
+  set products(List<ProductStruct> value) {
+    _products = value;
     prefs.setStringList(
-        'ff_products', _value.map((x) => x.serialize()).toList());
+        'ff_products', value.map((x) => x.serialize()).toList());
   }
 
-  void addToProducts(ProductStruct _value) {
-    _products.add(_value);
-    prefs.setStringList(
-        'ff_products', _products.map((x) => x.serialize()).toList());
-  }
-
-  void removeFromProducts(ProductStruct _value) {
-    _products.remove(_value);
+  void addToProducts(ProductStruct value) {
+    _products.add(value);
     prefs.setStringList(
         'ff_products', _products.map((x) => x.serialize()).toList());
   }
 
-  void removeAtIndexFromProducts(int _index) {
-    _products.removeAt(_index);
+  void removeFromProducts(ProductStruct value) {
+    _products.remove(value);
+    prefs.setStringList(
+        'ff_products', _products.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromProducts(int index) {
+    _products.removeAt(index);
     prefs.setStringList(
         'ff_products', _products.map((x) => x.serialize()).toList());
   }
 
   void updateProductsAtIndex(
-    int _index,
+    int index,
     ProductStruct Function(ProductStruct) updateFn,
   ) {
-    _products[_index] = updateFn(_products[_index]);
+    _products[index] = updateFn(_products[index]);
     prefs.setStringList(
         'ff_products', _products.map((x) => x.serialize()).toList());
   }
 
-  void insertAtIndexInProducts(int _index, ProductStruct _value) {
-    _products.insert(_index, _value);
+  void insertAtIndexInProducts(int index, ProductStruct value) {
+    _products.insert(index, value);
     prefs.setStringList(
         'ff_products', _products.map((x) => x.serialize()).toList());
   }
 
   List<SaleStruct> _sales = [];
   List<SaleStruct> get sales => _sales;
-  set sales(List<SaleStruct> _value) {
-    _sales = _value;
-    prefs.setStringList('ff_sales', _value.map((x) => x.serialize()).toList());
+  set sales(List<SaleStruct> value) {
+    _sales = value;
+    prefs.setStringList('ff_sales', value.map((x) => x.serialize()).toList());
   }
 
-  void addToSales(SaleStruct _value) {
-    _sales.add(_value);
+  void addToSales(SaleStruct value) {
+    _sales.add(value);
     prefs.setStringList('ff_sales', _sales.map((x) => x.serialize()).toList());
   }
 
-  void removeFromSales(SaleStruct _value) {
-    _sales.remove(_value);
+  void removeFromSales(SaleStruct value) {
+    _sales.remove(value);
     prefs.setStringList('ff_sales', _sales.map((x) => x.serialize()).toList());
   }
 
-  void removeAtIndexFromSales(int _index) {
-    _sales.removeAt(_index);
+  void removeAtIndexFromSales(int index) {
+    _sales.removeAt(index);
     prefs.setStringList('ff_sales', _sales.map((x) => x.serialize()).toList());
   }
 
   void updateSalesAtIndex(
-    int _index,
+    int index,
     SaleStruct Function(SaleStruct) updateFn,
   ) {
-    _sales[_index] = updateFn(_sales[_index]);
+    _sales[index] = updateFn(_sales[index]);
     prefs.setStringList('ff_sales', _sales.map((x) => x.serialize()).toList());
   }
 
-  void insertAtIndexInSales(int _index, SaleStruct _value) {
-    _sales.insert(_index, _value);
+  void insertAtIndexInSales(int index, SaleStruct value) {
+    _sales.insert(index, value);
     prefs.setStringList('ff_sales', _sales.map((x) => x.serialize()).toList());
   }
 
   List<CategoryStruct> _categories = [];
   List<CategoryStruct> get categories => _categories;
-  set categories(List<CategoryStruct> _value) {
-    _categories = _value;
+  set categories(List<CategoryStruct> value) {
+    _categories = value;
     prefs.setStringList(
-        'ff_categories', _value.map((x) => x.serialize()).toList());
+        'ff_categories', value.map((x) => x.serialize()).toList());
   }
 
-  void addToCategories(CategoryStruct _value) {
-    _categories.add(_value);
-    prefs.setStringList(
-        'ff_categories', _categories.map((x) => x.serialize()).toList());
-  }
-
-  void removeFromCategories(CategoryStruct _value) {
-    _categories.remove(_value);
+  void addToCategories(CategoryStruct value) {
+    _categories.add(value);
     prefs.setStringList(
         'ff_categories', _categories.map((x) => x.serialize()).toList());
   }
 
-  void removeAtIndexFromCategories(int _index) {
-    _categories.removeAt(_index);
+  void removeFromCategories(CategoryStruct value) {
+    _categories.remove(value);
+    prefs.setStringList(
+        'ff_categories', _categories.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromCategories(int index) {
+    _categories.removeAt(index);
     prefs.setStringList(
         'ff_categories', _categories.map((x) => x.serialize()).toList());
   }
 
   void updateCategoriesAtIndex(
-    int _index,
+    int index,
     CategoryStruct Function(CategoryStruct) updateFn,
   ) {
-    _categories[_index] = updateFn(_categories[_index]);
+    _categories[index] = updateFn(_categories[index]);
     prefs.setStringList(
         'ff_categories', _categories.map((x) => x.serialize()).toList());
   }
 
-  void insertAtIndexInCategories(int _index, CategoryStruct _value) {
-    _categories.insert(_index, _value);
+  void insertAtIndexInCategories(int index, CategoryStruct value) {
+    _categories.insert(index, value);
     prefs.setStringList(
         'ff_categories', _categories.map((x) => x.serialize()).toList());
   }

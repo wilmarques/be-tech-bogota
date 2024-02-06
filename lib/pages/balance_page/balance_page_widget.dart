@@ -79,389 +79,373 @@ class _BalancePageWidgetState extends State<BalancePageWidget> {
 
     context.watch<FFAppState>();
 
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Balance',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Santander Headline',
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      useGoogleFonts: false,
-                    ),
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primary,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Balance',
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily: 'Santander Headline',
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    useGoogleFonts: false,
+                  ),
+            ),
+            FlutterFlowIconButton(
+              borderColor: FlutterFlowTheme.of(context).primary,
+              borderRadius: 10.0,
+              borderWidth: 1.0,
+              buttonSize: 40.0,
+              fillColor: FlutterFlowTheme.of(context).primaryBackground,
+              icon: Icon(
+                Icons.add,
+                color: FlutterFlowTheme.of(context).primaryText,
+                size: 24.0,
               ),
-              FlutterFlowIconButton(
-                borderColor: FlutterFlowTheme.of(context).primary,
-                borderRadius: 10.0,
-                borderWidth: 1.0,
-                buttonSize: 40.0,
-                fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                icon: Icon(
-                  Icons.add,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 24.0,
-                ),
-                onPressed: () async {
-                  context.pushNamed('AddSalePage');
-                },
-              ),
-            ],
-          ),
-          actions: [],
-          centerTitle: false,
-          elevation: 2.0,
+              onPressed: () async {
+                context.pushNamed('AddSalePage');
+              },
+            ),
+          ],
         ),
-        body: SafeArea(
-          top: true,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Builder(builder: (context) {
-              return FFAppState().sales.isNotEmpty
-                  ? Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 12.0, 0.0),
-                          child: Text(
-                            'Cash flow',
-                            style: FlutterFlowTheme.of(context).headlineLarge,
-                          ),
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              formatNumber(
-                                _model.cashFlow,
-                                formatType: FormatType.decimal,
-                                decimalType: DecimalType.commaDecimal,
-                                currency: '\$',
-                              ),
-                              textAlign: TextAlign.end,
-                              style: FlutterFlowTheme.of(context).displayLarge,
-                            ),
-                            const Divider(
-                              height: 2.0,
-                              thickness: 1.0,
-                              color: Color(0xFFE5E7EB),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 12.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Profit',
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelMedium,
-                                        ),
-                                        RichText(
-                                          textScaleFactor:
-                                              MediaQuery.of(context)
-                                                  .textScaleFactor,
-                                          text: TextSpan(
-                                            children: [
-                                              TextSpan(
-                                                text: formatNumber(
-                                                  _model.totalProfit,
-                                                  formatType:
-                                                      FormatType.decimal,
-                                                  decimalType:
-                                                      DecimalType.commaDecimal,
-                                                  currency: '\$',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLarge,
-                                              ),
-                                              TextSpan(
-                                                text: ' / ',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
-                                              ),
-                                              TextSpan(
-                                                text: formatNumber(
-                                                  _model.totalProfit /
-                                                      _model.cashFlow,
-                                                  formatType:
-                                                      FormatType.percent,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                              )
-                                            ],
-                                            style: FlutterFlowTheme.of(context)
-                                                .displaySmall
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color:
-                                                      const Color(0xFF15161E),
-                                                  fontSize: 32.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsetsDirectional
-                                              .fromSTEB(0.0, 8.0, 0.0, 0.0),
-                                          child: LinearPercentIndicator(
-                                            percent: _model.totalProfit /
-                                                _model.cashFlow,
-                                            lineHeight: 12.0,
-                                            animation: true,
-                                            animateFromLastPercent: true,
-                                            progressColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .alternate,
-                                            backgroundColor:
-                                                const Color(0x400D5155),
-                                            barRadius:
-                                                const Radius.circular(16.0),
-                                            padding: EdgeInsets.zero,
-                                          ),
-                                        ),
-                                      ].divide(const SizedBox(height: 4.0)),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 12.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Costs',
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelMedium,
-                                        ),
-                                        RichText(
-                                          textScaleFactor:
-                                              MediaQuery.of(context)
-                                                  .textScaleFactor,
-                                          text: TextSpan(
-                                            children: [
-                                              TextSpan(
-                                                text: formatNumber(
-                                                  _model.totalCosts,
-                                                  formatType:
-                                                      FormatType.decimal,
-                                                  decimalType:
-                                                      DecimalType.commaDecimal,
-                                                  currency: '\$',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLarge,
-                                              ),
-                                              TextSpan(
-                                                text: ' / ',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
-                                              ),
-                                              TextSpan(
-                                                text: formatNumber(
-                                                  _model.totalCosts /
-                                                      _model.cashFlow,
-                                                  formatType:
-                                                      FormatType.percent,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                              )
-                                            ],
-                                            style: FlutterFlowTheme.of(context)
-                                                .displaySmall
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color:
-                                                      const Color(0xFF15161E),
-                                                  fontSize: 32.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsetsDirectional
-                                              .fromSTEB(0.0, 8.0, 0.0, 0.0),
-                                          child: LinearPercentIndicator(
-                                            percent: _model.totalCosts /
-                                                _model.cashFlow,
-                                            lineHeight: 12.0,
-                                            animation: true,
-                                            animateFromLastPercent: true,
-                                            progressColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .accent4,
-                                            backgroundColor:
-                                                const Color(0x41990000),
-                                            barRadius:
-                                                const Radius.circular(16.0),
-                                            padding: EdgeInsets.zero,
-                                          ),
-                                        ),
-                                      ].divide(const SizedBox(height: 4.0)),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Divider(
-                              height: 2.0,
-                              thickness: 1.0,
-                              color: Color(0xFFE5E7EB),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          'Past sales',
+        actions: const [],
+        centerTitle: false,
+        elevation: 2.0,
+      ),
+      body: SafeArea(
+        top: true,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Builder(builder: (context) {
+            return FFAppState().sales.isNotEmpty
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 12.0, 0.0),
+                        child: Text(
+                          'Cash flow',
                           style: FlutterFlowTheme.of(context).headlineLarge,
                         ),
-                        Expanded(
-                          child: Builder(
-                            builder: (context) {
-                              final salesDataTable =
-                                  _model.filledSales.toList();
-                              return FlutterFlowDataTable<SaleStruct>(
-                                controller: _model.paginatedDataTableController,
-                                data: salesDataTable,
-                                columnsBuilder: (onSortChanged) => [
-                                  DataColumn2(
-                                    label: DefaultTextStyle.merge(
-                                      softWrap: true,
-                                      child: Text(
-                                        'Product',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge,
-                                      ),
-                                    ),
-                                  ),
-                                  DataColumn2(
-                                    label: DefaultTextStyle.merge(
-                                      softWrap: true,
-                                      child: Text(
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            formatNumber(
+                              _model.cashFlow,
+                              formatType: FormatType.decimal,
+                              decimalType: DecimalType.commaDecimal,
+                              currency: '\$',
+                            ),
+                            textAlign: TextAlign.end,
+                            style: FlutterFlowTheme.of(context).displayLarge,
+                          ),
+                          const Divider(
+                            height: 2.0,
+                            thickness: 1.0,
+                            color: Color(0xFFE5E7EB),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 12.0, 0.0, 12.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
                                         'Profit',
                                         style: FlutterFlowTheme.of(context)
-                                            .labelLarge,
+                                            .labelMedium,
                                       ),
-                                    ),
+                                      RichText(
+                                        textScaleFactor: MediaQuery.of(context)
+                                            .textScaleFactor,
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: formatNumber(
+                                                _model.totalProfit,
+                                                formatType: FormatType.decimal,
+                                                decimalType:
+                                                    DecimalType.commaDecimal,
+                                                currency: '\$',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge,
+                                            ),
+                                            TextSpan(
+                                              text: ' / ',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                            TextSpan(
+                                              text: formatNumber(
+                                                _model.totalProfit /
+                                                    _model.cashFlow,
+                                                formatType: FormatType.percent,
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall,
+                                            )
+                                          ],
+                                          style: FlutterFlowTheme.of(context)
+                                              .displaySmall
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: const Color(0xFF15161E),
+                                                fontSize: 32.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                        child: LinearPercentIndicator(
+                                          percent: _model.totalProfit /
+                                              _model.cashFlow,
+                                          lineHeight: 12.0,
+                                          animation: true,
+                                          animateFromLastPercent: true,
+                                          progressColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          backgroundColor:
+                                              const Color(0x400D5155),
+                                          barRadius:
+                                              const Radius.circular(16.0),
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                      ),
+                                    ].divide(const SizedBox(height: 4.0)),
                                   ),
-                                  DataColumn2(
-                                    label: DefaultTextStyle.merge(
-                                      softWrap: true,
-                                      child: Text(
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 12.0, 0.0, 12.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
                                         'Costs',
                                         style: FlutterFlowTheme.of(context)
-                                            .labelLarge,
+                                            .labelMedium,
                                       ),
-                                    ),
+                                      RichText(
+                                        textScaleFactor: MediaQuery.of(context)
+                                            .textScaleFactor,
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: formatNumber(
+                                                _model.totalCosts,
+                                                formatType: FormatType.decimal,
+                                                decimalType:
+                                                    DecimalType.commaDecimal,
+                                                currency: '\$',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge,
+                                            ),
+                                            TextSpan(
+                                              text: ' / ',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                            TextSpan(
+                                              text: formatNumber(
+                                                _model.totalCosts /
+                                                    _model.cashFlow,
+                                                formatType: FormatType.percent,
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall,
+                                            )
+                                          ],
+                                          style: FlutterFlowTheme.of(context)
+                                              .displaySmall
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: const Color(0xFF15161E),
+                                                fontSize: 32.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                        child: LinearPercentIndicator(
+                                          percent: _model.totalCosts /
+                                              _model.cashFlow,
+                                          lineHeight: 12.0,
+                                          animation: true,
+                                          animateFromLastPercent: true,
+                                          progressColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .accent4,
+                                          backgroundColor:
+                                              const Color(0x41990000),
+                                          barRadius:
+                                              const Radius.circular(16.0),
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                      ),
+                                    ].divide(const SizedBox(height: 4.0)),
                                   ),
-                                ],
-                                dataRowBuilder: (salesDataTableItem,
-                                        salesDataTableIndex,
-                                        selected,
-                                        onSelectChanged) =>
-                                    DataRow(
-                                  color: MaterialStateProperty.all(
-                                    salesDataTableIndex % 2 == 0
-                                        ? FlutterFlowTheme.of(context)
-                                            .primaryBackground
-                                        : FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                  ),
-                                  cells: [
-                                    Text(
-                                      salesDataTableItem.product.name,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
-                                    ),
-                                    Text(
-                                      formatNumber(
-                                        salesDataTableItem.total,
-                                        formatType: FormatType.decimal,
-                                        decimalType: DecimalType.commaDecimal,
-                                        currency: '\$',
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
-                                    ),
-                                    Text(
-                                      formatNumber(
-                                        functions.calculateSaleCost(
-                                            salesDataTableItem),
-                                        formatType: FormatType.decimal,
-                                        decimalType: DecimalType.commaDecimal,
-                                        currency: '\$',
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
-                                    ),
-                                  ].map((c) => DataCell(c)).toList(),
                                 ),
-                                paginated: false,
-                                selectable: false,
-                                headingRowHeight: 56.0,
-                                dataRowHeight: 48.0,
-                                columnSpacing: 20.0,
-                                headingRowColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(8.0),
-                                addHorizontalDivider: true,
-                                horizontalDividerColor:
-                                    FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                horizontalDividerThickness: 1.0,
-                                addVerticalDivider: false,
-                              );
-                            },
+                              ],
+                            ),
                           ),
+                          const Divider(
+                            height: 2.0,
+                            thickness: 1.0,
+                            color: Color(0xFFE5E7EB),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        'Past sales',
+                        style: FlutterFlowTheme.of(context).headlineLarge,
+                      ),
+                      Expanded(
+                        child: Builder(
+                          builder: (context) {
+                            final salesDataTable = _model.filledSales.toList();
+                            return FlutterFlowDataTable<SaleStruct>(
+                              controller: _model.paginatedDataTableController,
+                              data: salesDataTable,
+                              columnsBuilder: (onSortChanged) => [
+                                DataColumn2(
+                                  label: DefaultTextStyle.merge(
+                                    softWrap: true,
+                                    child: Text(
+                                      'Product',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge,
+                                    ),
+                                  ),
+                                ),
+                                DataColumn2(
+                                  label: DefaultTextStyle.merge(
+                                    softWrap: true,
+                                    child: Text(
+                                      'Profit',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge,
+                                    ),
+                                  ),
+                                ),
+                                DataColumn2(
+                                  label: DefaultTextStyle.merge(
+                                    softWrap: true,
+                                    child: Text(
+                                      'Costs',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              dataRowBuilder: (salesDataTableItem,
+                                      salesDataTableIndex,
+                                      selected,
+                                      onSelectChanged) =>
+                                  DataRow(
+                                color: MaterialStateProperty.all(
+                                  salesDataTableIndex % 2 == 0
+                                      ? FlutterFlowTheme.of(context)
+                                          .primaryBackground
+                                      : FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                ),
+                                cells: [
+                                  Text(
+                                    salesDataTableItem.product.name,
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                  Text(
+                                    formatNumber(
+                                      salesDataTableItem.total,
+                                      formatType: FormatType.decimal,
+                                      decimalType: DecimalType.commaDecimal,
+                                      currency: '\$',
+                                    ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                  Text(
+                                    formatNumber(
+                                      functions.calculateSaleCost(
+                                          salesDataTableItem),
+                                      formatType: FormatType.decimal,
+                                      decimalType: DecimalType.commaDecimal,
+                                      currency: '\$',
+                                    ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                ].map((c) => DataCell(c)).toList(),
+                              ),
+                              paginated: false,
+                              selectable: false,
+                              headingRowHeight: 56.0,
+                              dataRowHeight: 48.0,
+                              columnSpacing: 20.0,
+                              headingRowColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(8.0),
+                              addHorizontalDivider: true,
+                              horizontalDividerColor:
+                                  FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                              horizontalDividerThickness: 1.0,
+                              addVerticalDivider: false,
+                            );
+                          },
                         ),
-                      ].divide(const SizedBox(height: 10.0)),
-                    )
-                  : const Center(child: Text('Add sales to see them here'));
-            }),
-          ),
+                      ),
+                    ].divide(const SizedBox(height: 10.0)),
+                  )
+                : const Center(child: Text('Add sales to see them here'));
+          }),
         ),
       ),
     );

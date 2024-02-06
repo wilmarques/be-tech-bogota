@@ -28,11 +28,8 @@ class AddProductPageModel extends FlutterFlowModel<AddProductPageWidget> {
   @override
   void dispose() {
     nameTextFieldController?.dispose();
-
     productionCostTextFieldController?.dispose();
-
     priceTextFieldController?.dispose();
-
     imageTextFieldController?.dispose();
   }
 

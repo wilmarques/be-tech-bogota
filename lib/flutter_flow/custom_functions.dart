@@ -19,8 +19,9 @@ List<ProductSalesStruct> calculateProductSales(
 
   for (final sale in sales) {
     final product = products.firstWhere((p) => p.id == sale.productId);
-    final ProductSalesStruct? existingProductSales =
-        productSales.firstWhere((ps) => ps.product.id == product.id);
+    final ProductSalesStruct? existingProductSales = productSales.isNotEmpty
+        ? productSales.firstWhere((ps) => ps.product.id == product.id)
+        : null;
 
     if (existingProductSales != null) {
       existingProductSales.sales.add(sale);

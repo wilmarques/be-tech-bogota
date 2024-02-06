@@ -185,7 +185,7 @@ class _AddSalePageWidgetState extends State<AddSalePageWidget> {
                   validator: _model.quantityTextFieldControllerValidator
                       .asValidator(context),
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
                   ],
                 ),
               ),
@@ -236,7 +236,7 @@ class _AddSalePageWidgetState extends State<AddSalePageWidget> {
                   validator: _model.totalTextFieldControllerValidator
                       .asValidator(context),
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
                   ],
                 ),
               ),
@@ -249,8 +249,9 @@ class _AddSalePageWidgetState extends State<AddSalePageWidget> {
                     child: FFButtonWidget(
                       onPressed: () async {
                         setState(() {
+                          final appState = FFAppState();
                           FFAppState().addToSales(SaleStruct(
-                            id: FFAppState().sales.length++,
+                            id: appState.sales.length + 1,
                             productId: _model.productDropDownValue,
                             quantity: int.tryParse(
                                 _model.quantityTextFieldController.text),

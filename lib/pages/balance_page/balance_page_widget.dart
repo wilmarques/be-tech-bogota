@@ -201,8 +201,9 @@ class _BalancePageWidgetState extends State<BalancePageWidget> {
                                             ),
                                             TextSpan(
                                               text: formatNumber(
-                                                _model.totalProfit /
-                                                    _model.cashFlow,
+                                                (_model.totalProfit /
+                                                        _model.cashFlow)
+                                                    .clamp(0.0, 1.0),
                                                 formatType: FormatType.percent,
                                               ),
                                               style:
@@ -224,8 +225,9 @@ class _BalancePageWidgetState extends State<BalancePageWidget> {
                                         padding: const EdgeInsetsDirectional
                                             .fromSTEB(0.0, 8.0, 0.0, 0.0),
                                         child: LinearPercentIndicator(
-                                          percent: _model.totalProfit /
-                                              _model.cashFlow,
+                                          percent: (_model.totalProfit /
+                                                  _model.cashFlow)
+                                              .clamp(0.0, 1.0),
                                           lineHeight: 12.0,
                                           animation: true,
                                           animateFromLastPercent: true,
@@ -289,8 +291,9 @@ class _BalancePageWidgetState extends State<BalancePageWidget> {
                                             ),
                                             TextSpan(
                                               text: formatNumber(
-                                                _model.totalCosts /
-                                                    _model.cashFlow,
+                                                (_model.totalProfit /
+                                                        _model.cashFlow)
+                                                    .clamp(0.0, 1.0),
                                                 formatType: FormatType.percent,
                                               ),
                                               style:
@@ -312,8 +315,9 @@ class _BalancePageWidgetState extends State<BalancePageWidget> {
                                         padding: const EdgeInsetsDirectional
                                             .fromSTEB(0.0, 8.0, 0.0, 0.0),
                                         child: LinearPercentIndicator(
-                                          percent: _model.totalCosts /
-                                              _model.cashFlow,
+                                          percent: (_model.totalProfit /
+                                                  _model.cashFlow)
+                                              .clamp(0.0, 1.0),
                                           lineHeight: 12.0,
                                           animation: true,
                                           animateFromLastPercent: true,

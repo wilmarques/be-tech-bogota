@@ -137,7 +137,8 @@ class _BalanceCardWidgetState extends State<BalanceCardWidget> {
                     TextSpan(
                       text: FFAppState().sales.isNotEmpty
                           ? formatNumber(
-                              _model.totalProfit / _model.cashFlow,
+                              (_model.totalProfit / _model.cashFlow)
+                                  .clamp(0.0, 1.0),
                               formatType: FormatType.percent,
                             )
                           : '-',
@@ -157,8 +158,8 @@ class _BalanceCardWidgetState extends State<BalanceCardWidget> {
                     const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: LinearPercentIndicator(
                   percent: FFAppState().sales.isNotEmpty
-                      ? _model.totalProfit / _model.cashFlow
-                      : 0,
+                      ? (_model.totalProfit / _model.cashFlow).clamp(0.0, 1.0)
+                      : 0.0,
                   lineHeight: 12.0,
                   animation: true,
                   animateFromLastPercent: true,

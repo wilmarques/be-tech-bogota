@@ -108,12 +108,13 @@ class _MostSellingProductCardWidgetState
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
-              child: Image.network(
-                _model.productSales!.product.imageSrc,
-                width: double.infinity,
-                height: 300.0,
-                fit: BoxFit.cover,
-              ),
+              child: Image.network(_model.productSales?.product.imageSrc ?? '',
+                  width: double.infinity,
+                  height: 300.0,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => const Center(
+                        child: Text('No image found'),
+                      )),
             ),
             Column(
               mainAxisSize: MainAxisSize.max,
